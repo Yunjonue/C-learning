@@ -10,9 +10,10 @@ double Integral (double (*f)(double), double from, double to, double step) {
     double i; // фактически - координата x, объявляем здесь, чтобы сохранить переменную после цикла
     for (i = from + step; i <= to - step; i += step) {
         sum += f(i);
-        
     }
-    sum += f(from / 2);
+
+    sum += f(from) / 2;
+    sum += f(i) / 2;
     sum *= step;
     sum += ((f(to) + f(i)) / 2) * (to - i);
     
@@ -27,20 +28,20 @@ double Integral (double (*f)(double), double from, double to, double step) {
     получим лишнюю погрешность в сторону увеличения результата.
     Для того, чтобы это предотвратить, сделаем на шаг меньше, а потом досчитаем
     оставшийся промежуток с конца. Отсюда i <= to - step. 
-    (to - from) - (int)(to - from) - остаток в конце, высота последней, маленькой трапеции */
+    ((f(to) + f(i)) / 2) * (to - i) - остаток в конце, площадь последней, маленькой трапеции */
 
     return sum;
 }
 
 double function(double x) {
     // любая функция
-    return x;
+    return sin(x);
 }
 
 int main() {
     double res;
 
-    res = Integral(function, 0, 10, 0.0001);
+    res = Integral(function, 0, 3.14159/4, 0.0001);
     printf("Result: %lf\n", res);
     return 0;
 }
