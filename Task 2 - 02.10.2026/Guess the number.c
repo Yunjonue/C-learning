@@ -48,6 +48,7 @@ void second_mode() {
     int maximum = 1000;
     printf("You'll set a number from 1 to 1000 and I'll try to guess it.\nHelp me by replying \">\", \"<\" or \"=\".\nIt's, literally, \"set number is greater\", \"set number is smaller\" and \"set number is guessed\".\nSet a number from 1 to 1000 >>> ");
     
+    scanf("%d", &number);
     while (number < 1 || number > 1000) {
         printf("Set a number from 1 to 1000 >>> ");
         clear_input();
