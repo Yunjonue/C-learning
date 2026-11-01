@@ -8,9 +8,12 @@ double Integral (double (*f)(double), double from, double to, double step) {
     
     double sum = 0;
     double i; // фактически - координата x, объявляем здесь, чтобы сохранить переменную после цикла
-    for (i = from; i <= to - step; i += step) {
-        sum += ((f(i) + f(i + step)) / 2) * step;
+    for (i = from + step; i <= to - step; i += step) {
+        sum += f(i);
+        
     }
+    sum += f(from / 2);
+    sum *= step;
     sum += ((f(to) + f(i)) / 2) * (to - i);
     
     /* Шаг интегрирования прибавляется после вычисления площади трапеции, то есть
@@ -18,7 +21,7 @@ double Integral (double (*f)(double), double from, double to, double step) {
     и в конце можем вылезти за пределы to (на примере sin от 0 до 3.14159:
     достигаем i = 3.1415 а площадь считается до 3.1416 > 3.14159).
     
-    Другоми словами в конце вычисления может остаться остаток меньше шага,
+    Другими словами в конце вычисления может остаться остаток меньше шага,
     на примере Integral(sin, 0, 3.14159, 0.0001) это 0.00009,
     и если мы будем считать его как полноценную трапецию с высотой равной шагу,
     получим лишнюю погрешность в сторону увеличения результата.
@@ -31,7 +34,7 @@ double Integral (double (*f)(double), double from, double to, double step) {
 
 double function(double x) {
     // любая функция
-    return pow(sin(x), 2) + pow(cos(x), 2);
+    return x;
 }
 
 int main() {
