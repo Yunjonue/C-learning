@@ -26,7 +26,7 @@ double calculate(double height, double width, double depth) {
     return mass;
 }
 
-double main(void) {
+int main(void) {
     // Высота, ширина, глубина шкафа соответственно
     double height, width, depth;
     printf("Height, width and depth in mm: ");
