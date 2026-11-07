@@ -16,30 +16,35 @@ void clear_input() {
     while (getchar() != '\n'); // выбросить мусор до конца строки
 }
 
+int random(int from, int to) {
+    srand((unsigned int)time(NULL));
+    return from + rand() % (to - from + 1);
+}
+
 void first_mode() {
     int number, guess;
-    number = rand() % 1000 + 1;
+    number = random(1, 1000);
 
     printf("I set a number from 1 to 1000. Good luck :)\nYour guess >>> ");
     do {
         scanf("%d", &guess);
+        clear_input();
 
         if (guess < number)
             printf("The set number is greater\n>>> ");
         
         else if (guess > number)
             printf("The set number is smaller\n>>> ");
-
+        
         else if (guess == number) {
             printf("Guessed! Press enter to enter the main menu\n");
-            clear_input();
-            getchar();
-            clear_input();
+            scanf("%c");
+            break;
         }
-        
+
         else
             printf("Try again");
-    } while (guess != number);
+    } while (1);
 }
 
 void second_mode() {
@@ -56,7 +61,7 @@ void second_mode() {
     }
 
     do {
-        guess = minimum + rand() % (maximum - minimum + 1);
+        guess = minimum + (maximum - minimum) / 2;
 
         printf("%d. Is it right? >>> ", guess);
 
@@ -73,8 +78,7 @@ void second_mode() {
             case '=':
                 printf("Guessed! Press enter to enter the main menu\n");
                 clear_input();
-                getchar();
-                clear_input();
+                scanf("%c");
                 goto main_menu;
             
             default:
@@ -89,25 +93,24 @@ void second_mode() {
 int main(void) {
     int mode;
 
-    srand((unsigned int)time(NULL));
-
     while (1) {
         printf("Choose a game mode\n1 - you are guessing a number\n2 - the progam is guessing a number\nOther inputs close the program\nYour choice is >>> ");
         
         switch (getchar()) {
             case '1':
+                clear_input();
                 first_mode();
                 break;
             
             case '2':
+                clear_input();
                 second_mode();
                 break;
             
             default:
-                goto exiting;
+                break;
         }
     }
 
-    exiting:
     return 0;
 }
