@@ -91,8 +91,6 @@ void second_mode() {
 }
 
 int main(void) {
-    int mode;
-
     while (1) {
         printf("Choose a game mode\n1 - you are guessing a number\n2 - the progam is guessing a number\nOther inputs close the program\nYour choice is >>> ");
         
